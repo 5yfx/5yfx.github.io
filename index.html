@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Apps</title>
+    <title>安卓APP</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
+        }
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         button {
             background-color: #4CAF50;
@@ -26,10 +33,12 @@
     </style>
 </head>
 <body>
-    <h1>Download Apps</h1>
-    <button id="clashMetaButton" style="display: none;">下载 Clash Meta</button>
-    <button id="singBoxButton" style="display: none;">下载 Sing-Box</button>
-    <button id="v2rayngButton" style="display: none;">下载 V2RayNG</button>
+    <h1>安卓APP</h1>
+    <div class="container">
+        <button id="clashMetaButton" style="display: none;">下载 Clash Meta</button>
+        <button id="singBoxButton" style="display: none;">下载 Sing-Box</button>
+        <button id="v2rayngButton" style="display: none;">下载 V2RayNG</button>
+    </div>
 
     <script>
         async function fetchRelease(repo, assetSuffix, buttonId) {
