@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Clash Meta</title>
+    <title>Download Apps</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +18,7 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
+            margin: 10px;
             cursor: pointer;
             border: none;
             border-radius: 4px;
@@ -26,28 +26,32 @@
     </style>
 </head>
 <body>
-    <h1>Clash Meta</h1>
-    <button id="downloadButton" style="display: none;">点击下载</button>
+    <h1>Download Apps</h1>
+    <button id="clashMetaButton" style="display: none;">下载 Clash Meta</button>
+    <button id="singBoxButton" style="display: none;">下载 Sing-Box</button>
+    <button id="v2rayngButton" style="display: none;">下载 V2RayNG</button>
 
     <script>
-        async function fetchLatestRelease() {
+        async function fetchRelease(repo, assetSuffix, buttonId) {
             try {
-                const response = await fetch('https://api.github.com/repos/MetaCubeX/ClashMetaForAndroid/releases/latest');
+                const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
                 const data = await response.json();
-                const asset = data.assets.find(a => a.name.endsWith('universal-release.apk'));
+                const asset = data.assets.find(a => a.name.endsWith(assetSuffix));
 
                 if (asset) {
-                    const baseUrl = 'https://ghp.ci/';
-                    const downloadButton = document.getElementById('downloadButton');
+                    const baseUrl = 'https://ghp.ci/+';
+                    const downloadButton = document.getElementById(buttonId);
                     downloadButton.style.display = 'inline-block';
                     downloadButton.onclick = () => window.open(baseUrl + asset.browser_download_url, '_blank');
                 }
             } catch (error) {
-                console.error('Error fetching release:', error);
+                console.error(`Error fetching release for ${repo}:`, error);
             }
         }
 
-        fetchLatestRelease();
+        fetchRelease('MetaCubeX/ClashMetaForAndroid', 'universal-release.apk', 'clashMetaButton');
+        fetchRelease('SagerNet/sing-box', 'foss-universal.apk', 'singBoxButton');
+        fetchRelease('2dust/v2rayNG', 'universal.apk', 'v2rayngButton');
     </script>
 </body>
 </html>
