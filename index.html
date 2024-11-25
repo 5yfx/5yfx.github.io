@@ -37,7 +37,7 @@
                 const asset = data.assets.find(a => a.name.endsWith('universal-release.apk'));
 
                 if (asset) {
-                    const baseUrl = 'https://ghp.ci/+';
+                    const baseUrl = 'https://ghp.ci/';
                     const downloadButton = document.getElementById('downloadButton');
                     downloadButton.style.display = 'inline-block';
                     downloadButton.onclick = () => window.open(baseUrl + asset.browser_download_url, '_blank');
