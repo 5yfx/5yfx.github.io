@@ -1,0 +1,157 @@
+
+port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+unified-delay: true
+global-client-fingerprint: chrome
+dns:
+  enable: true
+  listen: :53
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver: 
+    - 223.5.5.5
+    - 114.114.114.114
+    - 8.8.8.8
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  fallback:
+    - https://1.0.0.1/dns-query
+    - tls://dns.google
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+proxies:
+- name: CF_V8_hk1.155661.xyz_443
+  type: vless
+  server: hk1.155661.xyz
+  port: 443
+  uuid: ddbd79cd-1782-4f86-803c-eed4fc192ccf
+  udp: false
+  tls: true
+  network: ws
+  servername: 410hk.155661.xyz
+  ws-opts:
+    path: "/?ed=2560"
+    headers:
+      Host: 410hk.155661.xyz
+
+- name: CF_V9_hk2.155661.xyz_443
+  type: vless
+  server: hk2.155661.xyz
+  port: 443
+  uuid: ddbd79cd-1782-4f86-803c-eed4fc192ccf
+  udp: false
+  tls: true
+  network: ws
+  servername: 410hk.155661.xyz
+  ws-opts:
+    path: "/?ed=2560"
+    headers:
+      Host: 410hk.155661.xyz
+
+- name: CF_V10_hk3.155661.xyz_443
+  type: vless
+  server: hk3.155661.xyz
+  port: 443
+  uuid: ddbd79cd-1782-4f86-803c-eed4fc192ccf
+  udp: false
+  tls: true
+  network: ws
+  servername: 410hk.155661.xyz
+  ws-opts:
+    path: "/?ed=2560"
+    headers:
+      Host: 410hk.155661.xyz
+
+- name: CF_V11_hk4.155661.xyz_443
+  type: vless
+  server: hk4.155661.xyz
+  port: 443
+  uuid: ddbd79cd-1782-4f86-803c-eed4fc192ccf
+  udp: false
+  tls: true
+  network: ws
+  servername: 410hk.155661.xyz
+  ws-opts:
+    path: "/?ed=2560"
+    headers:
+      Host: 410hk.155661.xyz
+
+- name: CF_V12_hk5.155661.xyz_443
+  type: vless
+  server: hk5.155661.xyz
+  port: 443
+  uuid: ddbd79cd-1782-4f86-803c-eed4fc192ccf
+  udp: false
+  tls: true
+  network: ws
+  servername: 410hk.155661.xyz
+  ws-opts:
+    path: "/?ed=2560"
+    headers:
+      Host: 410hk.155661.xyz
+
+- name: CF_V13_hk6.155661.xyz_443
+  type: vless
+  server: hk6.155661.xyz
+  port: 443
+  uuid: ddbd79cd-1782-4f86-803c-eed4fc192ccf
+  udp: false
+  tls: true
+  network: ws
+  servername: 410hk.155661.xyz
+  ws-opts:
+    path: "/?ed=2560"
+    headers:
+      Host: 410hk.155661.xyz
+
+proxy-groups:
+- name: 负载均衡
+  type: load-balance
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+    - CF_V8_hk1.155661.xyz_443
+    - CF_V9_hk2.155661.xyz_443
+    - CF_V10_hk3.155661.xyz_443
+    - CF_V11_hk4.155661.xyz_443
+    - CF_V12_hk5.155661.xyz_443
+    - CF_V13_hk6.155661.xyz_443
+
+- name: 自动选择
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  proxies:
+    - CF_V8_hk1.155661.xyz_443
+    - CF_V9_hk2.155661.xyz_443
+    - CF_V10_hk3.155661.xyz_443
+    - CF_V11_hk4.155661.xyz_443
+    - CF_V12_hk5.155661.xyz_443
+    - CF_V13_hk6.155661.xyz_443
+
+- name: 🌍选择代理
+  type: select
+  proxies:
+    - 负载均衡
+    - 自动选择
+    - DIRECT
+    - CF_V8_hk1.155661.xyz_443
+    - CF_V9_hk2.155661.xyz_443
+    - CF_V10_hk3.155661.xyz_443
+    - CF_V11_hk4.155661.xyz_443
+    - CF_V12_hk5.155661.xyz_443
+    - CF_V13_hk6.155661.xyz_443
+
+rules:
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,🌍选择代理
