@@ -39,7 +39,7 @@
                 const asset = data.assets.find(a => a.name.endsWith(assetSuffix));
 
                 if (asset) {
-                    const baseUrl = 'https://ghp.ci/+';
+                    const baseUrl = 'https://ghp.ci/';
                     const downloadButton = document.getElementById(buttonId);
                     downloadButton.style.display = 'inline-block';
                     downloadButton.onclick = () => window.open(baseUrl + asset.browser_download_url, '_blank');
