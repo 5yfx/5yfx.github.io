@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安卓APP</title>
+    <title>安卓APP & Windows电脑端</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,6 +13,7 @@
         .container {
             border: 1px solid #ccc;
             padding: 20px;
+            margin: 20px;
             display: inline-block;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -44,6 +45,13 @@
         <button id="singBoxButton" style="display: none;">下载 Sing-Box</button>
     </div>
 
+    <div class="container">
+        <h1>Windows电脑端</h1>
+        <button id="v2raynButton" style="display: none;">下载 v2rayn</button>
+        <button id="clashVergeButton" style="display: none;">下载 Clash Verge</button>
+        <button id="singBoxWinButton" style="display: none;">下载 sing-box</button>
+    </div>
+
     <script>
         async function fetchRelease(repo, assetSuffix, buttonId) {
             try {
@@ -62,9 +70,15 @@
             }
         }
 
+        // 安卓APP
         fetchRelease('MetaCubeX/ClashMetaForAndroid', 'universal-release.apk', 'clashMetaButton');
         fetchRelease('SagerNet/sing-box', 'foss-universal.apk', 'singBoxButton');
         fetchRelease('2dust/v2rayNG', 'universal.apk', 'v2rayngButton');
+
+        // Windows电脑端
+        fetchRelease('2dust/v2rayn', 'windows-64-SelfContained-With-Core.7z', 'v2raynButton');
+        fetchRelease('clash-verge-rev/clash-verge-rev', 'arm64-setup.exe', 'clashVergeButton');
+        fetchRelease('SagerNet/sing-box', 'windows-arm64.zip', 'singBoxWinButton');
     </script>
 </body>
 </html>
