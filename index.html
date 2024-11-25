@@ -16,12 +16,16 @@
             display: inline-block;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
         }
         h1 {
-            color: white;
-            text-shadow: 2px 2px 0px black, 
-                         3px 3px 5px rgba(0, 0, 0, 0.3),
-                         0 0 10px rgba(255, 255, 255, 0.8);
+            color: black;
+            text-shadow: 0 0 10px rgba(144, 238, 144, 0.8);
+            margin: 0;
         }
         button {
             background-color: #4CAF50;
@@ -42,8 +46,8 @@
     <div class="container">
         <h1>安卓APP</h1>
         <button id="clashMetaButton" style="display: none;">下载 Clash Meta</button>
-        <button id="singBoxButton" style="display: none;">下载 Sing-Box</button>
         <button id="v2rayngButton" style="display: none;">下载 V2RayNG</button>
+        <button id="singBoxButton" style="display: none;">下载 Sing-Box</button>
     </div>
 
     <script>
