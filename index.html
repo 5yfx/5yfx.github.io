@@ -74,21 +74,13 @@ body {
         </div>
 
 
-<script>
-function showCustomAlert(message) {
-    const formattedMessage = message.replace(/\n/g, '<br>');
-    const alertBox = document.createElement('div');
-    alertBox.innerHTML = `<div style="background-color: white; border: 1px solid black; padding: 10px;">${formattedMessage}</div>`;
-    document.body.appendChild(alertBox);
-}
-</script>
-        
 <div class="container">
     <h1>苹果 APP</h1>
-    <button onclick="showCustomAlert('请自行注册美区苹果ID或者咸鱼、淘宝租个ID，\n 用美区ID登录 App Store 搜索 sing-box 下载。')">Sing-Box（免费）</button>
-    <button onclick="showCustomAlert('1、自行注册美区苹果ID充值5美金下载，\n 2、租用已经购买了Shadowrocket的ID。')">Shadowrocket（收费）</button>
-    <button onclick="showCustomAlert('1、自行注册美区苹果ID充值20美金下载，\n 2、租用已经购买了Quantumult的ID。')">Quantumult（收费）</button>
+    <button onclick="alert('请自行注册美区苹果ID或者咸鱼、淘宝租个ID，\n用美区ID登录 App Store 搜索 sing-box 下载。')">Sing-Box（免费）</button>
+    <button onclick="alert('1、自行注册美区苹果ID充值5美金下载，\n2、租用已经购买了Shadowrocket的ID。')">Shadowrocket（收费）</button>
+    <button onclick="alert('1、自行注册美区苹果ID充值20美金下载，\n2、租用已经购买了Quantumult的ID。')">Quantumult（收费）</button>
 </div>
+
 
 
 
