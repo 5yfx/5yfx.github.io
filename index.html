@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>应用下载</title>
     <style>
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background-image: url('https://bing.com/th?id=OHR.Oymyakon_ZH-CN7758768574_1920x1080.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('https://bing.com/th?id=OHR.Oymyakon_ZH-CN7758768574_1920x1080.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .container {
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #ccc;
@@ -28,11 +35,13 @@ body {
             justify-content: center;
             flex: 1;
         }
+
         h1 {
             color: black;
             text-shadow: 0 0 10px rgba(144, 238, 144, 0.8);
             margin-bottom: 20px;
         }
+
         button {
             background-color: #4CAF50;
             color: white;
@@ -47,16 +56,19 @@ body {
             border-radius: 4px;
             width: 100%;
         }
+
         .grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
         }
+
         @media (max-width: 768px) {
             .grid {
                 flex-direction: column;
             }
         }
+
         @media (min-width: 769px) {
             .container {
                 max-width: 45%;
@@ -73,18 +85,13 @@ body {
             <button id="singBoxButton" style="display: none;">Sing-Box</button>
         </div>
 
+        <div class="container">
+            <h1>苹果 APP</h1>
+            <button onclick="alert('请自行注册美区苹果ID或者咸鱼、淘宝租个ID，\n用美区ID登录 App Store 搜索 sing-box 下载。')">Sing-Box（免费）</button>
+            <button onclick="alert('1、自行注册美区苹果ID充值5美金下载，\n2、租用已经购买了Shadowrocket的ID。')">Shadowrocket（收费）</button>
+            <button onclick="alert('1、自行注册美区苹果ID充值20美金下载，\n2、租用已经购买了Quantumult的ID。')">Quantumult（收费）</button>
+        </div>
 
-<div class="container">
-    <h1>苹果 APP</h1>
-    <button onclick="alert('请自行注册美区苹果ID或者咸鱼、淘宝租个ID，\n用美区ID登录 App Store 搜索 sing-box 下载。')">Sing-Box（免费）</button>
-    <button onclick="alert('1、自行注册美区苹果ID充值5美金下载，\n2、租用已经购买了Shadowrocket的ID。')">Shadowrocket（收费）</button>
-    <button onclick="alert('1、自行注册美区苹果ID充值20美金下载，\n2、租用已经购买了Quantumult的ID。')">Quantumult（收费）</button>
-</div>
-
-
-
-
-        
         <div class="container">
             <h1>Windows电脑端</h1>
             <button id="v2raynButton" style="display: none;">v2rayn</button>
