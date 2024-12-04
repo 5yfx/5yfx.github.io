@@ -65,7 +65,6 @@
             border: none;
             border-radius: 4px;
             width: auto; /* Change width to auto */
-            min-width: 100px; /* Set a minimum width */
         }
 
         @media (min-width: 769px) {
@@ -125,52 +124,52 @@
             <button id="singBoxMacButton" style="display: none;">Sing-Box</button>
         </div>
 
-        <!-- New section integrated -->
+        <!-- 只修改了这一部分 -->
         <div class="container new-section">
             <h1>订阅地址</h1>
             <div class="row">
                 <span>香港：</span>
                 <div>
                     <span>1、Clash</span>
-                    <button onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
                 </div>
                 <div>
                     <span>2、V2Ray</span>
-                    <button onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
                 </div>
                 <div>
                     <span>3、Sing-Box</span>
-                    <button onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?sb', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?sb', this)">订阅</button>
                 </div>
             </div>
             <div class="row">
                 <span>美国：</span>
                 <div>
                     <span>1、Clash</span>
-                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
                 </div>
                 <div>
                     <span>2、V2Ray</span>
-                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
                 </div>
                 <div>
                     <span>3、Sing-Box</span>
-                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
                 </div>
             </div>
             <div class="row">
                 <span>英国：</span>
                 <div>
                     <span>1、Clash</span>
-                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
                 </div>
                 <div>
                     <span>2、V2Ray</span>
-                    <button onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
                 </div>
                 <div>
                     <span>3、Sing-Box</span>
-                    <button onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
+                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
                 </div>
             </div>
         </div>
@@ -231,7 +230,7 @@
 
         button.textContent = '复制成功！';
         setTimeout(() => {
-            button.textContent = '复制链接';
+            button.textContent = '订阅';
         }, 3000);
     }
 
