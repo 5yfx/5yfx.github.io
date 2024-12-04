@@ -64,7 +64,7 @@
             cursor: pointer;
             border: none;
             border-radius: 4px;
-            width: auto; /* Change width to auto */
+            width: 100%; /* Set to 100% for uniformity */
         }
 
         @media (min-width: 769px) {
@@ -131,45 +131,45 @@
                 <span>香港：</span>
                 <div>
                     <span>1、Clash</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
                 </div>
                 <div>
                     <span>2、V2Ray</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
                 </div>
                 <div>
                     <span>3、Sing-Box</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?sb', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://hk.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?sb', this)">订阅</button>
                 </div>
             </div>
             <div class="row">
                 <span>美国：</span>
                 <div>
                     <span>1、Clash</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
                 </div>
                 <div>
                     <span>2、V2Ray</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
                 </div>
                 <div>
                     <span>3、Sing-Box</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
                 </div>
             </div>
             <div class="row">
                 <span>英国：</span>
                 <div>
                     <span>1、Clash</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://us.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?clash', this)">订阅</button>
                 </div>
                 <div>
                     <span>2、V2Ray</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1', this)">订阅</button>
                 </div>
                 <div>
                     <span>3、Sing-Box</span>
-                    <button style="width: auto; min-width: 80px;" onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
+                    <button onclick="copyToClipboard('https://eu.ipbot.us.kg/8c86da90-89a2-4c48-9fbc-556c47b8ddf1?singbox', this)">订阅</button>
                 </div>
             </div>
         </div>
@@ -230,7 +230,7 @@
 
         button.textContent = '复制成功！';
         setTimeout(() => {
-            button.textContent = '订阅';
+            button.textContent = '复制链接';
         }, 3000);
     }
 
