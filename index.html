@@ -179,6 +179,9 @@
         </div>
     </div>
 
+    <!-- Hidden input for copying text -->
+    <input type="text" id="tempInput" style="position: absolute; left: -9999px;">
+
 <script>
     async function fetchRelease(repo, assetSuffix, buttonId) {
         const cacheKey = `${repo}-${assetSuffix}`;
@@ -221,15 +224,18 @@
     }
 
     function copyToClipboard(url, button) {
-        navigator.clipboard.writeText(url).then(() => {
-            button.textContent = '复制成功！';
-            setTimeout(() => {
-                button.textContent = '复制链接';
-            }, 3000);
-        }).catch(err => {
-            console.error('复制失败:', err);
-            alert('复制失败，请重试。'); // 提示用户复制失败
-        });
+        const tempInput = document.getElementById('tempInput');
+        tempInput.value = url; // Set the input value to the URL
+        tempInput.select(); // Select the input value
+        tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the temporary input
+        document.execCommand('copy');
+
+        button.textContent = '复制成功！';
+        setTimeout(() => {
+            button.textContent = '订阅';
+        }, 3000);
     }
 
     // 安卓APP
