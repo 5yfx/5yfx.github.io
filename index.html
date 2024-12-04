@@ -64,7 +64,8 @@
             cursor: pointer;
             border: none;
             border-radius: 4px;
-            width: 100%;
+            width: auto; /* Change width to auto */
+            min-width: 100px; /* Set a minimum width */
         }
 
         @media (min-width: 769px) {
@@ -77,24 +78,20 @@
         /* Additional styles for the new section */
         .new-section .row {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Align items to the start */
             align-items: center;
             margin: 10px 0;
         }
 
+        .new-section span {
+            flex: 1; /* Allow title to take available space */
+            text-align: left; /* Align text to the left */
+        }
+
         .new-section button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin-left: 10px;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            flex-shrink: 0; /* Prevent button from shrinking */
+            margin-left: 10px; /* Space between title and button */
+            width: auto; /* Change width to auto */
+            min-width: 80px; /* Set a minimum width */
         }
     </style>
 </head>
@@ -234,7 +231,7 @@
 
         button.textContent = '复制成功！';
         setTimeout(() => {
-            button.textContent = '订阅';
+            button.textContent = '复制链接';
         }, 3000);
     }
 
