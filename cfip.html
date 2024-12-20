@@ -1,170 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>合适的IP</title>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    td {
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      th, td {
-        padding: 12px 5px;
-        font-size: 14px;
-      }
-
-      th {
-        font-size: 16px;
-      }
-    }
-
-    .logo-row {
-      background-color: #f9f9f9;
-      text-align: center;
-    }
-
-    .logo-text {
-      font-size: 1.5em;
-      font-weight: bold;
-      padding: 20px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP 地址提取</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
-
 <body>
-  <table>
-    <thead>
-      <tr class="logo-row">
-        <td colspan="4" class="logo-text">本地优选最快IP</td>
-      </tr>
-      <tr>
-        <th>序号</th>
-        <th>香港IP</th>
-        <th>美国IP</th>
-        <th>英国IP</th>
-      </tr>
-    </thead>
-    <tbody id="ipTable">
-      <!-- IP行将被填充在这里 -->
-    </tbody>
-  </table>
+    <h1>IPv4 地址提取</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>香港IP</th>
+                <th>美国IP</th>
+                <th>英国IP</th>
+            </tr>
+        </thead>
+        <tbody id="ipTableBody"></tbody>
+    </table>
 
-  <script>
-    // 使用 CORS 代理绕过跨域限制
-    const corsProxy = 'https://corsproxy.io/?';
+    <script>
+        const urls = {
+            hk: "https://api.github.com/repos/5yfx/CF_HK_US_EU_IP/contents/%E9%A6%99%E6%B8%AF.txt",
+            us: "https://api.github.com/repos/5yfx/CF_HK_US_EU_IP/contents/%E7%BE%8E%E5%9B%BD.txt",
+            uk: "https://api.github.com/repos/5yfx/CF_HK_US_EU_IP/contents/%E8%8B%B1%E5%9B%BD.txt"
+        };
 
-    // GitHub 页面地址
-    const hkUrl = 'https://api.github.com/repos/5yfx/CF_HK_US_EU_IP/contents/%E9%A6%99%E6%B8%AF.txt';
-    const usUrl = 'https://api.github.com/repos/5yfx/CF_HK_US_EU_IP/contents/%E7%BE%8E%E5%9B%BD.txt';
-    const ukUrl = 'https://api.github.com/repos/5yfx/CF_HK_US_EU_IP/contents/%E8%8B%B1%E5%9B%BD.txt';
+        const ipTableBody = document.getElementById('ipTableBody');
 
-    // 定义 IPv4 地址的正则表达式
-    const ipv4Regex = /\b(?:\d{1,3}\.){3}\d{1,3}\b/g;
+        async function fetchIPs() {
+            const ipData = { hk: [], us: [], uk: [] };
 
-    // 从 URL 获取 IP 数据并过滤出 IPv4 地址
-    const fetchIPData = async (url) => {
-      try {
-        const response = await fetch(corsProxy + encodeURIComponent(url));
-        if (!response.ok) {
-          console.error(`Failed to fetch data from ${url}: ${response.statusText}`);
-          return [];
+            for (const [key, url] of Object.entries(urls)) {
+                const response = await fetch(url);
+                const json = await response.json();
+                const content = atob(json.content); // 解码 Base64 内容
+                const ipv4Regex = /(\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b)/g;
+                ipData[key] = content.match(ipv4Regex) || [];
+            }
+
+            const maxLength = Math.max(ipData.hk.length, ipData.us.length, ipData.uk.length);
+            for (let i = 0; i < maxLength; i++) {
+                const row = document.createElement('tr');
+                const cellIndex = document.createElement('td');
+                cellIndex.innerText = i + 1;
+
+                const cellHK = document.createElement('td');
+                cellHK.innerText = ipData.hk[i] || '';
+
+                const cellUS = document.createElement('td');
+                cellUS.innerText = ipData.us[i] || '';
+
+                const cellUK = document.createElement('td');
+                cellUK.innerText = ipData.uk[i] || '';
+
+                row.appendChild(cellIndex);
+                row.appendChild(cellHK);
+                row.appendChild(cellUS);
+                row.appendChild(cellUK);
+                ipTableBody.appendChild(row);
+            }
         }
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const preTag = doc.querySelector('pre');
-        const data = preTag ? preTag.textContent : '';
-        return data.match(ipv4Regex) || [];
-      } catch (error) {
-        console.error(`Error fetching file from ${url}:`, error.message);
-        return [];
-      }
-    };
 
-    // 获取香港、美国、英国的 IP 数据
-    const hkPromise = fetchIPData(hkUrl);
-    const usPromise = fetchIPData(usUrl);
-    const ukPromise = fetchIPData(ukUrl);
-
-    // 等待所有数据加载完成
-    Promise.all([hkPromise, usPromise, ukPromise])
-      .then(([hkIPs, usIPs, ukIPs]) => {
-        const maxLength = Math.max(hkIPs.length, usIPs.length, ukIPs.length);
-        const tableBody = document.getElementById('ipTable');
-
-        for (let i = 0; i < maxLength; i++) {
-          if (!hkIPs[i] && !usIPs[i] && !ukIPs[i]) continue;
-
-          const row = document.createElement('tr');
-
-          const indexCell = document.createElement('td');
-          indexCell.textContent = i + 1;
-          row.appendChild(indexCell);
-
-          const hkCell = createIPCell(hkIPs[i]);
-          const usCell = createIPCell(usIPs[i]);
-          const ukCell = createIPCell(ukIPs[i]);
-
-          row.appendChild(hkCell);
-          row.appendChild(usCell);
-          row.appendChild(ukCell);
-
-          tableBody.appendChild(row);
-        }
-      })
-      .catch(error => {
-        console.error('读取文件出错：', error);
-      });
-
-    function createIPCell(ip) {
-      const cell = document.createElement('td');
-      cell.textContent = ip || '';
-      if (ip) {
-        cell.addEventListener('click', () => {
-          copyToClipboard(ip, cell);
-        });
-      }
-      return cell;
-    }
-
-    function copyToClipboard(text, cell) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-
-      try {
-        document.execCommand('copy');
-        const originalText = cell.textContent;
-        cell.textContent = '已复制成功！';
-        setTimeout(() => {
-          cell.textContent = originalText;
-        }, 3000);
-      } catch (err) {
-        console.error('复制到剪贴板失败: ', err);
-      }
-
-      document.body.removeChild(textarea);
-    }
-  </script>
+        fetchIPs().catch(error => console.error('Error fetching IPs:', error));
+    </script>
 </body>
-
 </html>
