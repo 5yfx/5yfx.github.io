@@ -13,9 +13,13 @@
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
+            cursor: pointer; /* 鼠标悬停时显示为可点击 */
         }
         th {
             background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center; /* 将标题居中 */
         }
     </style>
 </head>
@@ -59,14 +63,9 @@
                 const cellIndex = document.createElement('td');
                 cellIndex.innerText = i + 1;
 
-                const cellHK = document.createElement('td');
-                cellHK.innerText = ipData.hk[i] || '';
-
-                const cellUS = document.createElement('td');
-                cellUS.innerText = ipData.us[i] || '';
-
-                const cellUK = document.createElement('td');
-                cellUK.innerText = ipData.uk[i] || '';
+                const cellHK = createIPCell(ipData.hk[i]);
+                const cellUS = createIPCell(ipData.us[i]);
+                const cellUK = createIPCell(ipData.uk[i]);
 
                 row.appendChild(cellIndex);
                 row.appendChild(cellHK);
@@ -74,6 +73,23 @@
                 row.appendChild(cellUK);
                 ipTableBody.appendChild(row);
             }
+        }
+
+        function createIPCell(ip) {
+            const cell = document.createElement('td');
+            cell.innerText = ip || '';
+            cell.onclick = () => copyIP(cell);
+            return cell;
+        }
+
+        function copyIP(cell) {
+            const ipText = cell.innerText;
+            navigator.clipboard.writeText(ipText).then(() => {
+                cell.innerText = '复制成功！';
+                setTimeout(() => {
+                    cell.innerText = ipText;
+                }, 3000);
+            }).catch(err => console.error('复制失败:', err));
         }
 
         fetchIPs().catch(error => console.error('Error fetching IPs:', error));
