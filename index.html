@@ -77,7 +77,7 @@
         /* Additional styles for the new section */
         .new-section .row {
             display: flex;
-            justify-content: flex-start; /* Align items to the start */
+            justify-content: space-between; /* Align items to space between */
             align-items: center;
             margin: 10px 0;
         }
@@ -85,6 +85,7 @@
         .new-section span {
             flex: 1; /* Allow title to take available space */
             text-align: left; /* Align text to the left */
+            margin-right: 10px; /* Space between title and button */
         }
 
         .new-section button {
@@ -111,7 +112,7 @@
         </div>
 
         <div class="container">
-            <h1>Windows电脑端</h1>
+            <h1>Windows 电脑端</h1>
             <button id="v2raynButton" style="display: none;">v2rayn</button>
             <button id="clashVergeButton" style="display: none;">Clash Verge</button>
             <button id="singBoxWinButton" style="display: none;">Sing-Box</button>
@@ -128,7 +129,6 @@
         <div class="container new-section">
             <h1>香港、美国、英国 节点订阅地址</h1>
             <div class="row">
-                <span></span>
                 <div>
                     <span>1、V2Ray</span>
                     <button onclick="copyToClipboard('https://kkii.eu.org/vpn', this)">复制</button>
