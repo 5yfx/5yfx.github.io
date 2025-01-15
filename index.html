@@ -125,8 +125,7 @@
             <button id="singBoxMacButton" style="display: none;">Sing-Box</button>
         </div>
 
-        <!-- 只修改了这一部分 -->
-        <div class="container new-section">
+        <div class="container">
             <h1>香港、美国、英国 节点订阅地址</h1>
             <div class="row">
                 <div>
@@ -149,7 +148,6 @@
         </div>
     </div>
 
-    <!-- Hidden input for copying text -->
     <input type="text" id="tempInput" style="position: absolute; left: -9999px;">
 
 <script>
@@ -172,11 +170,10 @@
             const asset = data.assets.find(a => a.name.endsWith(assetSuffix));
 
             if (asset) {
-                const baseUrl = 'https://ghgo.xyz/';
                 const downloadButton = document.getElementById(buttonId);
                 downloadButton.style.display = 'inline-block';
-                downloadButton.onclick = () => window.open(baseUrl + asset.browser_download_url, '_blank');
-                localStorage.setItem(cacheKey, baseUrl + asset.browser_download_url);
+                downloadButton.onclick = () => window.open(asset.browser_download_url, '_blank');
+                localStorage.setItem(cacheKey, asset.browser_download_url);
                 localStorage.removeItem(alertShownKey); // Reset alert status if successful
             }
         } catch (error) {
@@ -228,9 +225,22 @@
 
             if (newDomain) {
                 // 更新下载链接
-                const downloadLinks = document.querySelectorAll('a[href*="https://ghgo.xyz/"]');
-                downloadLinks.forEach(link => {
-                    link.href = link.href.replace('https://ghgo.xyz/', newDomain);
+                const downloadButtons = document.querySelectorAll('button[id$="Button"]');
+                downloadButtons.forEach(button => {
+                    const repoName = button.id.replace('Button', '');
+                    const assetSuffix = button.id.includes('ClashMeta') ? 'universal-release.apk' :
+                                        button.id.includes('V2RayNG') ? 'universal.apk' :
+                                        button.id.includes('singBox') ? 'foss-universal.apk' :
+                                        button.id.includes('v2rayn') ? 'windows-64-SelfContained-With-Core.7z' :
+                                        button.id.includes('clashVerge') ? 'arm64-setup.exe' :
+                                        button.id.includes('singBoxWin') ? 'windows-arm64.zip' :
+                                        button.id.includes('clashVergeRev') ? 'aarch64.dmg' :
+                                        button.id.includes('v2rayu') ? 'arm64.dmg' :
+                                        null;
+
+                    if (assetSuffix) {
+                        button.onclick = () => window.open(newDomain + assetSuffix, '_blank');
+                    }
                 });
             } else {
                 console.error('未找到域名');
