@@ -208,6 +208,41 @@
         }, 3000);
     }
 
+    async function updateDownloadLinks() {
+        const newServiceUrl = 'https://ghproxy.link/';
+
+        try {
+            const response = await fetch(newServiceUrl);
+            if (!response.ok) {
+                throw new Error('网络响应失败');
+            }
+            const html = await response.text();
+
+            // 使用 DOMParser 解析 HTML
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // 提取第一个域名
+            const domainElement = doc.querySelector('.domain-status .domain-name a');
+            const newDomain = domainElement ? domainElement.href : null;
+
+            if (newDomain) {
+                // 更新下载链接
+                const downloadLinks = document.querySelectorAll('a[href*="https://ghgo.xyz/"]');
+                downloadLinks.forEach(link => {
+                    link.href = link.href.replace('https://ghgo.xyz/', newDomain);
+                });
+            } else {
+                console.error('未找到域名');
+            }
+        } catch (error) {
+            console.error('获取域名时出错:', error);
+        }
+    }
+
+    // 调用更新下载链接的函数
+    updateDownloadLinks();
+
     // 安卓APP
     fetchRelease('MetaCubeX/ClashMetaForAndroid', 'universal-release.apk', 'clashMetaButton');
     fetchRelease('SagerNet/sing-box', 'foss-universal.apk', 'singBoxButton');
